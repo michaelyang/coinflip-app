@@ -12,7 +12,7 @@ let data = {
     'Win Rate',
     'Win Amount',
     'Lose Amount',
-    'Number of Bets per Trial',
+    'Bets per Trial',
     'Number of Trials'
   ],
   datasets: [

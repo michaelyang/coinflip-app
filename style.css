@@ -60,6 +60,7 @@ canvas {
 
 .fieldwrapper {
   display: flex;
+  flex-wrap: wrap;
   width: 80%;
   justify-content: space-between;
   align-items: center;
