@@ -1,0 +1,120 @@
+:root {
+  --pink: #f7717d;
+  --blue: #75b9be;
+  --yellow: #e9b533;
+  --grey: #5e6472;
+  --black: #333;
+}
+
+html {
+  font-size: 10px;
+  font-family: 'Nunito', sans-serif;
+  height: 100%;
+}
+
+.border {
+  height: 1.5rem;
+  width: 100%;
+  background-color: var(--pink);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  background: white;
+  background-size: cover;
+  align-items: center;
+  justify-content: center;
+}
+
+.title {
+  font-size: 2rem;
+}
+
+canvas {
+  width: 100% !important;
+  max-width: 1200px;
+  height: auto !important;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.chart {
+  flex: 1;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.controls {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.fieldwrapper {
+  display: flex;
+  width: 80%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.control {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.control label {
+  font-size: 1.4rem;
+  font-weight: bold;
+  padding: 0.6rem;
+}
+
+.control input {
+  text-align: center;
+}
+
+.btn {
+  border: none;
+  font-family: inherit;
+  font-size: 1.6rem;
+  cursor: pointer;
+  padding: 10px 30px;
+  display: inline-block;
+  margin: 15px 30px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  outline: none;
+  position: relative;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.btn:focus,
+.btn:active:focus,
+.btn.active:focus {
+  outline: 0 none;
+}
+
+.btn-primary {
+  background: #33a6cc;
+  color: #ffffff;
+}
+
+.btn-primary:hover {
+  background: var(--blue);
+}
+
+.btn-primary:active {
+  background: #007299;
+  box-shadow: none;
+}

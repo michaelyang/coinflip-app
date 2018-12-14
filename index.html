@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>CoinFlip App</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Nunito"
+      rel="stylesheet"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.js"></script>
+  </head>
+  <body>
+    <div class="border"></div>
+    <h1 class="title">Invex CoinFlip App</h1>
+    <div class="chart"><canvas id="myChart"></canvas></div>
+    <div class="controls">
+      <div class="fieldwrapper">
+        <div class="control">
+          <label for="winrate">Win Rate</label>
+          <input type="text" name="winamount" value="0.50" />
+        </div>
+        <div class="control">
+          <label for="winamount">Win Amount</label>
+          <input type="text" name="winamount" value="5" />
+        </div>
+        <div class="control">
+          <label for="loseamount">Lose Amount</label>
+          <input type="text" name="loseamount" value="5" />
+        </div>
+        <div class="control">
+          <label for="betspertrial">Number of Bets per Trial</label>
+          <input type="text" name="betspertrial" value="10" />
+        </div>
+        <div class="control">
+          <label for="trial">Number of Trials</label>
+          <input type="text" name="trial" value="100" />
+        </div>
+      </div>
+    </div>
+    <script src="scripts.js"></script>
+  </body>
+</html>
