@@ -8,12 +8,18 @@
       href="https://fonts.googleapis.com/css?family=Nunito"
       rel="stylesheet"
     />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.js"></script>
+    <!--
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.js"></script>
+    -->
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/boost.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
   </head>
   <body>
     <div class="border"></div>
     <h1 class="title">CoinFlip App</h1>
-    <div class="chart"><canvas id="graph"></canvas></div>
+    <div id="graph"></div>
+    <!-- <div class="chart"><canvas id="graph"></canvas></div> -->
     <div class="controls">
       <div class="fieldwrapper">
         <div class="control">
@@ -30,7 +36,7 @@
         </div>
         <div class="control">
           <label for="betspertrial">Bets per Trial</label>
-          <input type="number" step="10" name="betspertrial" value="10" />
+          <input type="number" step="50" name="betspertrial" value="10" />
         </div>
         <div class="control">
           <label for="trial">Number of Trials</label>

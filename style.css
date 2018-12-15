@@ -105,3 +105,9 @@ canvas {
 .graph-button:active {
   background: #007299;
 }
+
+#graph {
+  min-width: 380;
+  max-width: 600px;
+  margin: 0 auto;
+}
