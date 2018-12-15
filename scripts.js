@@ -1,5 +1,12 @@
 const inputFields = document.querySelectorAll(`input[type=number]`);
 const submitButton = document.querySelector(`button[type=submit]`);
+inputFields.forEach(inputField =>
+  inputField.addEventListener("keydown", e => {
+    if (e.keyCode === 13) {
+      submitButton.click();
+    }
+  })
+);
 submitButton.addEventListener("click", handleSubmit);
 let graphData = [];
 let context = document.getElementById("graph").getContext("2d");
@@ -62,6 +69,7 @@ function createData(winRate, winAmount, loseAmount, betPerTrial) {
   );
   return cumulativeData;
 }
+
 function updateData(data) {
   graph.data.datasets[0].data = data;
 }
