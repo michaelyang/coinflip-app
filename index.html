@@ -13,30 +13,31 @@
   <body>
     <div class="border"></div>
     <h1 class="title">CoinFlip App</h1>
-    <div class="chart"><canvas id="myChart"></canvas></div>
+    <div class="chart"><canvas id="graph"></canvas></div>
     <div class="controls">
       <div class="fieldwrapper">
         <div class="control">
           <label for="winrate">Win Rate</label>
-          <input type="text" name="winamount" value="0.50" />
+          <input type="number" step="0.10" name="winamount" value="0.50" />
         </div>
         <div class="control">
           <label for="winamount">Win Amount</label>
-          <input type="text" name="winamount" value="5" />
+          <input type="number" step="0.50" name="winamount" value="5" />
         </div>
         <div class="control">
           <label for="loseamount">Lose Amount</label>
-          <input type="text" name="loseamount" value="5" />
+          <input type="number" step="0.50" name="loseamount" value="5" />
         </div>
         <div class="control">
           <label for="betspertrial">Bets per Trial</label>
-          <input type="text" name="betspertrial" value="10" />
+          <input type="number" step="10" name="betspertrial" value="10" />
         </div>
         <div class="control">
           <label for="trial">Number of Trials</label>
-          <input type="text" name="trial" value="100" />
+          <input type="number" step="100" name="trial" value="100" />
         </div>
       </div>
+      <button type="submit" class="graph-button">Graph</button>
     </div>
     <script src="scripts.js"></script>
   </body>

@@ -8,8 +8,7 @@
 
 html {
   font-size: 10px;
-  font-family: 'Nunito', sans-serif;
-  height: 100%;
+  font-family: "Nunito", sans-serif;
 }
 
 .border {
@@ -22,7 +21,7 @@ body {
   margin: 0;
   padding: 0;
   display: flex;
-  height: 100%;
+  width: 100%;
   flex-direction: column;
   background: white;
   background-size: cover;
@@ -35,9 +34,7 @@ body {
 }
 
 canvas {
-  width: 100% !important;
   max-width: 1200px;
-  height: auto !important;
   margin-left: auto;
   margin-right: auto;
 }
@@ -64,6 +61,7 @@ canvas {
   width: 80%;
   justify-content: space-between;
   align-items: center;
+  padding: 2rem;
 }
 
 .control {
@@ -83,39 +81,27 @@ canvas {
   text-align: center;
 }
 
-.btn {
+.graph-button {
   border: none;
   font-family: inherit;
   font-size: 1.6rem;
   cursor: pointer;
   padding: 10px 30px;
-  display: inline-block;
   margin: 15px 30px;
   text-transform: uppercase;
   letter-spacing: 1px;
   outline: none;
-  position: relative;
   -webkit-transition: all 0.3s;
   -moz-transition: all 0.3s;
   transition: all 0.3s;
-}
-
-.btn:focus,
-.btn:active:focus,
-.btn.active:focus {
-  outline: 0 none;
-}
-
-.btn-primary {
   background: #33a6cc;
   color: #ffffff;
 }
 
-.btn-primary:hover {
+.graph-button:hover {
   background: var(--blue);
 }
 
-.btn-primary:active {
+.graph-button:active {
   background: #007299;
-  box-shadow: none;
 }

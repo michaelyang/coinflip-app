@@ -1,65 +1,69 @@
-const textFields = document.querySelectorAll(`input[type=text]`);
+const inputFields = document.querySelectorAll(`input[type=number]`);
+const submitButton = document.querySelector(`button[type=submit]`);
+submitButton.addEventListener("click", handleSubmit);
 let graphData = [];
-textFields.forEach((textField, index) => {
-  textField.addEventListener('change', () =>
-    handleChange(myGraph, textField, index)
-  );
-  graphData.push(textField.value);
-});
-let ctx = document.getElementById('myChart').getContext('2d');
+let context = document.getElementById("graph").getContext("2d");
 let data = {
-  labels: [
-    'Win Rate',
-    'Win Amount',
-    'Lose Amount',
-    'Bets per Trial',
-    'Number of Trials'
-  ],
   datasets: [
     {
-      data: graphData,
-      label: 'Data',
-      backgroundColor: [
-        'rgba(255, 99, 132, 0.2)',
-        'rgba(54, 162, 235, 0.2)',
-        'rgba(255, 206, 86, 0.2)',
-        'rgba(75, 192, 192, 0.2)',
-        'rgba(153, 102, 255, 0.2)',
-        'rgba(255, 159, 64, 0.2)'
-      ],
-      borderColor: [
-        'rgba(255,99,132,1)',
-        'rgba(54, 162, 235, 1)',
-        'rgba(255, 206, 86, 1)',
-        'rgba(75, 192, 192, 1)',
-        'rgba(153, 102, 255, 1)',
-        'rgba(255, 159, 64, 1)'
-      ],
-      borderWidth: 3,
-      fill: true
+      label: "Data",
+      data: graphData
     }
   ]
 };
+
 const options = {
   legend: {
     display: false
   },
   responsive: true,
-  maintainAspectRatio: true
+  maintainAspectRatio: true,
+  tooltips: { enabled: false },
+  hover: { mode: null }
 };
-let myGraph = new Chart(ctx, {
-  type: 'bar',
+
+let graph = new Chart(context, {
+  type: "scatter",
   data: data,
   options: options
 });
 
-function handleChange(graph, textField, index) {
-  updateData(graph, index, textField.value);
+function handleSubmit() {
+  const [
+    winRate,
+    winAmount,
+    loseAmount,
+    betPerTrial,
+    numberOfTrials
+  ] = Array.from(inputFields.values()).map(data => parseFloat(data.value));
+  let data = [].concat.apply(
+    [],
+    Array.from({ length: numberOfTrials }, () =>
+      createData(winRate, winAmount, loseAmount, betPerTrial)
+    )
+  );
+  updateData(data);
   updateGraph(graph);
 }
 
-function updateData(graph, index, data) {
-  graph.data.datasets[0].data[index] = data;
+function createData(winRate, winAmount, loseAmount, betPerTrial) {
+  let generatedData = Array.from({ length: betPerTrial }, () => Math.random());
+  let cumulativeData = generatedData.reduce(
+    (prev, curr, i) => [
+      ...prev,
+      {
+        x: i + 1,
+        y:
+          (curr < winRate ? winAmount : -1 * loseAmount) +
+          (prev[i - 1] ? prev[i - 1].y : 0)
+      }
+    ],
+    []
+  );
+  return cumulativeData;
+}
+function updateData(data) {
+  graph.data.datasets[0].data = data;
 }
 
 function updateGraph(graph) {
