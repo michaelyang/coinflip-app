@@ -115,7 +115,13 @@ function updateHC(data, maxX) {
     yAxis: [
       {
         labels: {
-          format: "${value}"
+          formatter: function() {
+            if (this.value >= 0) {
+              return "$" + this.value;
+            } else {
+              return "-$" + this.value * -1;
+            }
+          }
         },
         minPadding: 0,
         maxPadding: 0.05,
@@ -125,7 +131,13 @@ function updateHC(data, maxX) {
       },
       {
         labels: {
-          format: "${value}"
+          formatter: function() {
+            if (this.value >= 0) {
+              return "$" + this.value;
+            } else {
+              return "-$" + this.value * -1;
+            }
+          }
         },
         linkedTo: 0,
         opposite: true,
