@@ -112,17 +112,35 @@ function updateHC(data, maxX) {
         text: "Number of Bets"
       }
     },
-    yAxis: {
-      minPadding: 0,
-      maxPadding: 0.05,
-      title: {
-        text: "Payout ($)"
+    yAxis: [
+      {
+        labels: {
+          format: "${value}"
+        },
+        minPadding: 0,
+        maxPadding: 0.05,
+        title: {
+          text: "Payout ($)"
+        }
+      },
+      {
+        labels: {
+          format: "${value}"
+        },
+        linkedTo: 0,
+        opposite: true,
+        title: {
+          text: null
+        }
       }
-    },
+    ],
     title: {
       text: null
     },
     legend: {
+      enabled: false
+    },
+    exporting: {
       enabled: false
     },
     series: [
