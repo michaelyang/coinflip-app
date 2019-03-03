@@ -1,11 +1,11 @@
 const inputFields = document.querySelectorAll(`input[type=number]`);
 const submitButton = document.querySelector(`button[type=submit]`);
 inputFields.forEach(inputField =>
-  inputField.addEventListener("keydown", e => {
-    if (e.keyCode === 13) {
-      submitButton.click();
-    }
-  })
+    inputField.addEventListener("keydown", e => {
+        if (e.keyCode === 13) {
+            submitButton.click();
+        }
+    })
 );
 submitButton.addEventListener("click", handleSubmit);
 /*
@@ -38,145 +38,149 @@ let graph = new Chart(context, {
 */
 
 function handleSubmit() {
-  const [
-    winRate,
-    winAmount,
-    loseAmount,
-    betPerTrial,
-    numberOfTrials
-  ] = Array.from(inputFields.values()).map(data => parseFloat(data.value));
-  let data = [].concat.apply(
-    [],
-    Array.from({ length: numberOfTrials }, () =>
-      createHCData(winRate, winAmount, loseAmount, betPerTrial)
-    )
-  );
-  updateHC(data, betPerTrial);
-  //updateData(data);
-  //updateGraph(graph);
+    const [
+        winRate,
+        winAmount,
+        loseAmount,
+        betPerTrial,
+        numberOfTrials
+    ] = Array.from(inputFields.values()).map(data => parseFloat(data.value));
+    let data = [].concat.apply(
+        [],
+        Array.from({ length: numberOfTrials }, () =>
+            createHCData(winRate, winAmount, loseAmount, betPerTrial)
+        )
+    );
+    updateHC(data, betPerTrial);
+    //updateData(data);
+    //updateGraph(graph);
 }
 
 function createData(winRate, winAmount, loseAmount, betPerTrial) {
-  let generatedData = Array.from({ length: betPerTrial }, () => Math.random());
-  let cumulativeData = generatedData.reduce(
-    (prev, curr, i) => [
-      ...prev,
-      {
-        x: i + 1,
-        y:
-          (curr < winRate ? winAmount : -1 * loseAmount) +
-          (prev[i - 1] ? prev[i - 1].y : 0)
-      }
-    ],
-    []
-  );
-  console.log(data);
-  return cumulativeData;
+    let generatedData = Array.from({ length: betPerTrial }, () =>
+        Math.random()
+    );
+    let cumulativeData = generatedData.reduce(
+        (prev, curr, i) => [
+            ...prev,
+            {
+                x: i + 1,
+                y:
+                    (curr < winRate ? winAmount : -1 * loseAmount) +
+                    (prev[i - 1] ? prev[i - 1].y : 0)
+            }
+        ],
+        []
+    );
+    console.log(data);
+    return cumulativeData;
 }
 
 function createHCData(winRate, winAmount, loseAmount, betPerTrial) {
-  let generatedData = Array.from({ length: betPerTrial }, () => Math.random());
-  let cumulativeData = generatedData.reduce(
-    (prev, curr, i) => [
-      ...prev,
-      [
-        i + 1,
-        (curr < winRate ? winAmount : -1 * loseAmount) +
-          (prev[i - 1] ? prev[i - 1][1] : 0)
-      ]
-    ],
-    []
-  );
-  return cumulativeData;
+    let generatedData = Array.from({ length: betPerTrial }, () =>
+        Math.random()
+    );
+    let cumulativeData = generatedData.reduce(
+        (prev, curr, i) => [
+            ...prev,
+            [
+                i + 1,
+                (curr < winRate ? winAmount : -1 * loseAmount) +
+                    (prev[i - 1] ? prev[i - 1][1] : 0)
+            ]
+        ],
+        []
+    );
+    return cumulativeData;
 }
 
 function updateHC(data, maxX) {
-  if (!Highcharts.Series.prototype.renderCanvas) {
-    throw "Module not loaded";
-  }
+    if (!Highcharts.Series.prototype.renderCanvas) {
+        throw "Module not loaded";
+    }
 
-  Highcharts.chart("graph", {
-    chart: {
-      zoomType: "xy",
-      height: "100%"
-    },
-    boost: {
-      useGPUTranslations: true,
-      usePreAllocated: true
-    },
-    xAxis: {
-      min: 0,
-      max: maxX,
-      gridLineWidth: 1,
-      title: {
-        text: "Number of Bets"
-      }
-    },
-    yAxis: [
-      {
-        labels: {
-          formatter: function() {
-            if (this.value >= 0) {
-              return "$" + this.value;
-            } else {
-              return "-$" + this.value * -1;
+    Highcharts.chart("graph", {
+        chart: {
+            zoomType: "xy",
+            height: "100%"
+        },
+        boost: {
+            useGPUTranslations: true,
+            usePreAllocated: true
+        },
+        xAxis: {
+            min: 0,
+            max: maxX,
+            gridLineWidth: 1,
+            title: {
+                text: "Number of Bets"
             }
-          }
         },
-        minPadding: 0,
-        maxPadding: 0.05,
-        title: {
-          text: "Payout ($)"
-        }
-      },
-      {
-        labels: {
-          formatter: function() {
-            if (this.value >= 0) {
-              return "$" + this.value;
-            } else {
-              return "-$" + this.value * -1;
+        yAxis: [
+            {
+                labels: {
+                    formatter: function() {
+                        if (this.value >= 0) {
+                            return "$" + this.value;
+                        } else {
+                            return "-$" + this.value * -1;
+                        }
+                    }
+                },
+                minPadding: 0,
+                maxPadding: 0.05,
+                title: {
+                    text: "Payout ($)"
+                }
+            },
+            {
+                labels: {
+                    formatter: function() {
+                        if (this.value >= 0) {
+                            return "$" + this.value;
+                        } else {
+                            return "-$" + this.value * -1;
+                        }
+                    }
+                },
+                linkedTo: 0,
+                opposite: true,
+                title: {
+                    text: null
+                }
             }
-          }
-        },
-        linkedTo: 0,
-        opposite: true,
+        ],
         title: {
-          text: null
-        }
-      }
-    ],
-    title: {
-      text: null
-    },
-    legend: {
-      enabled: false
-    },
-    exporting: {
-      enabled: false
-    },
-    series: [
-      {
-        type: "scatter",
-        color: "rgba(152,0,67,0.2)",
-        data: data,
-        marker: {
-          radius: 1
+            text: null
         },
-        tooltip: {
-          followPointer: false,
-          pointFormat: "[{point.x:.1f}, {point.y:.1f}]"
-        }
-      }
-    ]
-  });
+        legend: {
+            enabled: false
+        },
+        exporting: {
+            enabled: false
+        },
+        series: [
+            {
+                type: "scatter",
+                color: "rgba(0,0,0,0.6)",
+                data: data,
+                marker: {
+                    radius: 2
+                },
+                tooltip: {
+                    followPointer: false,
+                    pointFormat: "[{point.x:.1f}, {point.y:.1f}]"
+                }
+            }
+        ]
+    });
 }
 
 function updateData(data) {
-  graph.data.datasets[0].data = data;
+    graph.data.datasets[0].data = data;
 }
 
 function updateGraph(graph) {
-  graph.update();
+    graph.update();
 }
 handleSubmit();
